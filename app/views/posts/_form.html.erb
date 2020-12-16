@@ -12,7 +12,7 @@
 
   <div class="field py-2">
     <%= form.label :name, class: "pb-2" %>
-    <%= form.collection_select :name, Author.order(:last_name), :name_with_initial, :name_with_initial, {prompt: "Select author"}, {class: "form-control"} %>
+    <%= form.collection_select :name, Author.order(:last_name), :name_with_initial, :name_with_initial, { prompt: "Select author" }, { class: "form-control" } %>
   </div>
 
   <div class="field py-2">

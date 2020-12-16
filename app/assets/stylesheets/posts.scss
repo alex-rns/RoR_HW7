@@ -1,6 +1,50 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.content {
-  max-width: 600px;
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+.posts-table {
+  .content, .title {
+    max-width: 600px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .title {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .posts-table {
+    .content {
+      max-width: 450px;
+    }
+    .title {
+      max-width: 200px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .posts-table {
+    .content {
+      max-width: 280px;
+    }
+    .title {
+      max-width: 180px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .posts-table {
+    .content {
+      max-width: 100px;
+    }
+    .title {
+      max-width: 100px;
+    }
+  }
 }
