@@ -66,6 +66,26 @@ or download from [git](https://github.com/alex-rns/RoR_HW7)
 - bootstrap
 - gem "faker"
 
+## Literature
+
+- https://rubygems.org/gems/rails
+- https://www.xyzpub.com/en/ruby-on-rails/3.2/seed_rb.html
+- https://guides.rubyonrails.org/command_line.html
+- https://www.jetbrains.com/help/ruby/ruby-gemsets.html
+- https://getbootstrap.com/docs/4.3/getting-started/download/#rubygems
+- https://github.com/twbs/bootstrap-rubygem/blob/master/README.md
+- https://guides.rubyonrails.org/action_view_overview.html
+- https://guides.rubyonrails.org/layouts_and_rendering.html
+
+### Additional literature
+- https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+- https://guides.rubyonrails.org/routing.html
+- https://guides.rubyonrails.org/active_record_validations.html
+
+### Additional links
+- https://mattbrictson.com/sublime-text-3-recommendations - хорошая статья по настройке Sublime Text 3
+- https://www.marksayson.com/blog/setting-up-sublime-text-editor-for-ruby-on-rails/ - еще одна
+
 License
 ----
 
