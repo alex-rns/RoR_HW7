@@ -3,4 +3,8 @@
     <%= comment.author.first_name %> <%= comment.author.last_name %>:
   </strong>
   <%= comment.body %>
+  <%= comment.status %>
+  <%= form_with model: @comment do |form| %>
+    <%= form.submit "Publish" %>
+  <% end %>
 </div>

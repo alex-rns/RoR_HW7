@@ -20,8 +20,9 @@
 </p>
 
 <div class="comments my-5">
-  <h5>Comments</h5>
-  <%= render @post.comments %>
+  <h5 class="mb-3">Comments</h5>
+  <%= render @post.comments.unpublished %>
+  <%= render @post.comments.published %>
 </div>
 
 <h5> Add a comment:</h5>
