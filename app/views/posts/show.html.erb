@@ -7,7 +7,7 @@
   </p>
 </div>
 
-<div class="text-center">
+<div class="text-center mb-5">
   <h2>
     <%= @post.title %>
   </h2>
@@ -19,33 +19,13 @@
   <%= @post.content %>
 </p>
 
-<h1>All comments</h1>
-<% @post.comments.each do |comment| %>
-  <div class="alert alert-light">
-    <p>
-      <%= comment.body %>
-    </p>
-  </div>
-<% end %>
+<div class="comments my-5">
+  <h5>Comments</h5>
+  <%= render @post.comments %>
+</div>
 
+<h5> Add a comment:</h5>
+<%= render 'comments/form' %>
 
-<h2> Add comment</h2>
-<%= form_for([@post, @post.comments.build]) do |form| %>
-
-  <div class="field py-2">
-    <%= form.label :author_id, class: "pb-2" %>
-    <%= form.collection_select :author_id, Author.order(:last_name), :id, :last_name, { prompt: "Select author" }, { class: "form-control" } %>
-  </div>
-
-  <div class="field py-2">
-    <%= form.label :body, class: "pb-2" %>
-    <%= form.text_area :body, class: "form-control" %>
-  </div>
-
-  <div class="actions py-2">
-    <%= form.submit(class: "btn btn-success") %>
-  </div>
-<% end %>
-
-<%= link_to 'Edit', edit_post_path(@post), class: "btn btn-secondary"  %>
-<%= link_to 'Back', posts_path, class: "btn btn-secondary"  %>
+<%= link_to 'Edit', edit_post_path(@post), class: "btn btn-secondary" %>
+<%= link_to 'Back', posts_path, class: "btn btn-secondary" %>
