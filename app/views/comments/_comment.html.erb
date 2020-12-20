@@ -4,5 +4,11 @@
   </strong>
   <%= comment.body %>
   <%= comment.status %>
-  <%= link_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure you want to delete the comment?' } %>
+
+  <%= link_to 'Delete comment', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure you want to delete the comment?' } %>
+
+  <% if comment.status == 'unpublished' %>
+    <%= link_to 'Publish this comment', post_comment_path(@post, comment, comment: { status: :published }), method: :patch %>
+  <% end %>
+
 </div>
