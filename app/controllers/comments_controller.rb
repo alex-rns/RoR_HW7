@@ -1,15 +1,27 @@
 class CommentsController < ApplicationController
+
+
   # def update
   #   @post = Post.find(params[:post_id])
-  #   if @comment.update(params[:status])
-  #     redirect_to @post
-  #   end
+  #   @comment = @post.comments.find(params[:id])
+  #   @comment.update(comments_params)
+  #   redirect_to @post
   # end
 
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.create(comments_params)
     redirect_to @post
+  end
+
+  def destroy
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to @post, notice: "Comment was successfully deleted." }
+      format.json { head :no_content }
+    end
   end
 
   private

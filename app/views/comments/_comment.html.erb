@@ -4,7 +4,5 @@
   </strong>
   <%= comment.body %>
   <%= comment.status %>
-  <%= form_with model: @comment do |form| %>
-    <%= form.submit "Publish" %>
-  <% end %>
+  <%= link_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure you want to delete the comment?' } %>
 </div>
