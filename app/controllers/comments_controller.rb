@@ -4,10 +4,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.update(comments_params)
-    respond_to do |format|
-      format.html { redirect_to @post, notice: "Comment was published." }
-      format.json { head :no_content }
-    end
+    redirect_to @post, notice: "Comment was published."
   end
 
   def create
@@ -20,10 +17,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to @post, notice: "Comment was successfully deleted." }
-      format.json { head :no_content }
-    end
+    redirect_to @post, notice: "Comment was successfully deleted."
   end
 
   private

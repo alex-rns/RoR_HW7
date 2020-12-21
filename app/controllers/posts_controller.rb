@@ -10,6 +10,11 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    if params[:comment_status] == "unpublished"
+      @comments = @post.comments.unpublished
+    else
+      @comments = @post.comments.published
+    end
   end
 
   # GET /posts/new
