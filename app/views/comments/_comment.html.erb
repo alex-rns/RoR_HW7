@@ -1,14 +1,24 @@
-<div>
-  <strong>
+<div class="border-bottom border-dark mt-3">
+  <strong class="mr-3">
     <%= comment.author.first_name %> <%= comment.author.last_name %>:
   </strong>
-  <%= comment.body %>
-  <%= comment.status %>
-
-  <%= link_to 'Delete comment', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure you want to delete the comment?' } %>
-
-  <% if comment.status == 'unpublished' %>
-    <%= link_to 'Publish this comment', post_comment_path(@post, comment, comment: { status: :published }), method: :patch %>
+  <div class="d-block p-3">
+    <p><%= comment.body %></p>
+  </div>
+  <% if comment.status == "unpublished" %>
+    <p class="alert-danger">This comment <%= comment.status %></p>
   <% end %>
 
+
+  <div class="text-right mb-3">
+    <%= link_to 'Delete comment', post_comment_path(@post, comment),
+                method: :delete,
+                data: { confirm: 'Are you sure you want to delete the comment?' },
+                class: "btn btn-danger" %>
+    <% if comment.status == 'unpublished' %>
+      <%= link_to 'Publish this comment', post_comment_path(@post, comment, comment: { status: :published }),
+                  method: :patch,
+                  class: "btn btn-success" %>
+    <% end %>
+  </div>
 </div>
