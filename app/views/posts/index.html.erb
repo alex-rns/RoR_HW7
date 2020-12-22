@@ -9,6 +9,7 @@
       <th>Title</th>
       <th class="th-sm">Content</th>
       <th>Comments count</th>
+      <th>Views count</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td class="title"><%= post.title %></td>
         <td class="content"><%= post.content %></td>
         <td class="content"><%= post.comments.size %></td>
+        <td class="view"><%= post.post_views %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure you want to delete the post?' } %></td>
