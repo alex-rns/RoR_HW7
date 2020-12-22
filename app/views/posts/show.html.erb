@@ -18,18 +18,18 @@
 <p>
   <%= @post.content %>
 </p>
+<p class="text-right fst-italic">Post created (or updated) <%= distance_of_time_in_words(@post.updated_at, Time.now) %> ago</p>
 
 <div class="comments my-5">
   <h5 class="py-5 border-bottom border-dark text-center">Comments</h5>
-  <%= render @comments%>
+  <%= render @comments %>
 </div>
 
 <div class="text-right">
   <%= form_with model: @post, local: true, html: {comment_status: 'post'}, method: :get do |form| %>
-    <p>Show comments:</p>
-    <%= form.radio_button :comment_status, :published, :checked => "checked" %>
+    <%= form.radio_button :comment_status, :published %>
     <%= form.label :comment_status, "Published", :value => "published" %>
-    <%= form.radio_button :comment_status, "unpublished" %>
+    <%= form.radio_button :comment_status, :unpublished %>
     <%= form.label :comment_status, "Unpublished", :value => "unpublished" %>
     <%= form.submit 'Show', class: 'btn btn-primary' %>
   <% end %>
