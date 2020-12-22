@@ -25,13 +25,13 @@
 </div>
 
 <div class="text-right">
-  <%= form_with model: @post, method: :get do %>
+  <%= form_with model: @post, local: true, html: {comment_status: 'post'}, method: :get do |form| %>
     <p>Show comments:</p>
-    <%= radio_button_tag :comment_status, "published" , true %>
-    <%= label_tag :published, "Published" %>
-    <%= radio_button_tag :comment_status, "unpublished" %>
-    <%= label_tag :unpublished, "Unpublished" %>
-    <%= submit_tag 'Show', class: 'btn btn-primary' %>
+    <%= form.radio_button :comment_status, :published, :checked => "checked" %>
+    <%= form.label :comment_status, "Published", :value => "published" %>
+    <%= form.radio_button :comment_status, "unpublished" %>
+    <%= form.label :comment_status, "Unpublished", :value => "unpublished" %>
+    <%= form.submit 'Show', class: 'btn btn-primary' %>
   <% end %>
 </div>
 
