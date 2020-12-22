@@ -11,10 +11,10 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post.increment!(:post_views)
-    if params.dig(:post, :comment_status) == "unpublished"
-      @comments = @post.comments.unpublished
+    @comments = if params.dig(:post, :comment_status) == "unpublished"
+      @post.comments.unpublished
     else
-      @comments = @post.comments.published
+      @post.comments.published
     end
   end
 
@@ -76,6 +76,6 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:name, :title, :content, :image,)
+    params.require(:post).permit(:name, :title, :content, :image)
   end
 end
