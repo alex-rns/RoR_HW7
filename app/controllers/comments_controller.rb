@@ -1,26 +1,31 @@
 class CommentsController < ApplicationController
-
-  def update
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
-    @comment.update(comments_params)
-    redirect_to @post, notice: "Comment was published."
-  end
+  before_action :set_post, only: [ :create, :update, :destroy]
+  before_action :set_comment, only: [ :update, :destroy]
 
   def create
-    @post = Post.find(params[:post_id])
     @comment = @post.comments.create(comments_params)
     redirect_to @post
   end
 
+  def update
+    @comment.update(comments_params)
+    redirect_to @post, notice: "Comment was published."
+  end
+
   def destroy
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
     @comment.destroy
     redirect_to @post, notice: "Comment was successfully deleted."
   end
 
   private
+
+  def set_post
+    @comment = @post.comments.find(params[:id])
+  end
+
+  def set_comment
+    @post = Post.find(params[:id])
+  end
 
   def comments_params
     params.require(:comment).permit(:author_id, :body, :status)
