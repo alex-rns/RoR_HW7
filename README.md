@@ -1,6 +1,6 @@
 # **GeekHub X | RoR | Homework 7**
 
-![minion_screen](https://user-images.githubusercontent.com/23439223/102497685-9f26a180-4081-11eb-8efe-c95cf45868bf.png)
+![site_screen](https://user-images.githubusercontent.com/23439223/102497685-9f26a180-4081-11eb-8efe-c95cf45868bf.png)
 
 ## Description
 This project was created to practice ruby.
@@ -32,20 +32,70 @@ This project was created to practice ruby.
 16) Поле image – url. Выводить на странице поста между title и description через хелпер/метод image_tag.
 17) Залить на Хероку.
 
+## Literature
+
+- https://rubygems.org/gems/rails
+- https://www.xyzpub.com/en/ruby-on-rails/3.2/seed_rb.html
+- https://guides.rubyonrails.org/command_line.html
+- https://www.jetbrains.com/help/ruby/ruby-gemsets.html
+- https://getbootstrap.com/docs/4.3/getting-started/download/#rubygems
+- https://github.com/twbs/bootstrap-rubygem/blob/master/README.md
+- https://guides.rubyonrails.org/action_view_overview.html
+- https://guides.rubyonrails.org/layouts_and_rendering.html
+
+### Additional literature
+- https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+- https://guides.rubyonrails.org/routing.html
+- https://guides.rubyonrails.org/active_record_validations.html
+
+### Additional links
+- https://mattbrictson.com/sublime-text-3-recommendations - хорошая статья по настройке Sublime Text 3
+- https://www.marksayson.com/blog/setting-up-sublime-text-editor-for-ruby-on-rails/ - еще одна
+
+# **GeekHub X | RoR | Homework 8**
+
+![site_screen](https://user-images.githubusercontent.com/23439223/102992569-1e095780-4524-11eb-9c8c-96576873faa7.png)
+
+## Description
+This project was created to practice ruby.
+
+## Assigned task
+
+Используя ваш текущий проект (блог) расширить его.
+
+## Steps
+
+1) Добавить сущность Comment
+2) Добавить миграцию в БД для связи таблиц posts и comments
+3) Добавить связь в моделях comment belongs_to post, post has_many comments
+4) Комментарий должен иметь поля:
+   - body (type: text)
+   - status (type: integer) использовать enum
+   - поле status может иметь значения [published, unpublished]
+   - user_id
+   - post_id
+5) Добавить возможность создавать комментарий, комментарий должен принадлежать пользователю и посту (не должно быть возможности создавать комментарий которые не будет привязан к одной из сущностей (user, post))
+6) По умолчанию когда мы заходим на страницу поста, мы должны видеть только опубликованные коментарии, для этого используйте scope (:published) отсеивая только опубликованные комментарии с помощью выборки
+7) Добавить селект бокс с помощью которого мы сможем иметь возможность отображать либо опубликованные либо не опубликованные комментарии (или/или), для выборки не обуликованных комментарии тоже нужно использовать scope (:unpublished)
+8) При сохранении комментария, мы должны проверять что комментарий не пустой (есть значение в поле body), что он принадлежит и пользователю (которого мы выбрали) и посту в котором мы его создаём (коммент должен создаваться на странице поста), при создании по умолчанию комментарий должен быть не опубликован
+9) На старнице блога мы должны иметь возможность выбрать отображение не опубликованных комментариев и возле каждого из коментариев должна быть кнопка опубликовать (publish) которая будет обновлять поле status и менять его значение на published. Ajax пока для этого использовать не обязательно, по-этому можно перезагружать страницу (редиректить на пост на котором вы были).
+10) Добавить хелпер distance_of_time_in_words для отображения на странице даты обновления (updated_at) поля постов и комментариев
+11) Добавить counter_cache для постов и выводить результат на списке постов (показывать кол-во просмотров поста)
+
 ## Requirements
 
 - Ruby 2.7.0
-- Rails 6.1.0  
-- postgresql 12.5  
+- Rails 6.1.0
+- postgresql 12.5
 - git (optional)
 
 ## Download
 
 Clone this repository into your computer:
 ```sh
-$ git clone https://github.com/alex-rns/RoR_HW7
+$ git clone https://github.com/alex-rns/RoR_HW7_HW8
 ```
-or download from [git](https://github.com/alex-rns/RoR_HW7)
+or download from [git](https://github.com/alex-rns/RoR_HW7_HW8)
 
 ## How to start
 
@@ -68,27 +118,18 @@ or download from [git](https://github.com/alex-rns/RoR_HW7)
 
 ## Literature
 
-- https://rubygems.org/gems/rails
-- https://www.xyzpub.com/en/ruby-on-rails/3.2/seed_rb.html
-- https://guides.rubyonrails.org/command_line.html
-- https://www.jetbrains.com/help/ruby/ruby-gemsets.html
-- https://getbootstrap.com/docs/4.3/getting-started/download/#rubygems
-- https://github.com/twbs/bootstrap-rubygem/blob/master/README.md
-- https://guides.rubyonrails.org/action_view_overview.html
-- https://guides.rubyonrails.org/layouts_and_rendering.html
-
-### Additional literature
-- https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
-- https://guides.rubyonrails.org/routing.html
-- https://guides.rubyonrails.org/active_record_validations.html
-
-### Additional links
-- https://mattbrictson.com/sublime-text-3-recommendations - хорошая статья по настройке Sublime Text 3
-- https://www.marksayson.com/blog/setting-up-sublime-text-editor-for-ruby-on-rails/ - еще одна
+- https://api.rubyonrails.org/v5.2.4.4/classes/ActiveRecord/Enum.html
+- https://apidock.com/rails/ActionView/Helpers/DateHelper/distance_of_time_in_words
+- https://guides.rubyonrails.org/association_basics.html
+- https://blog.appsignal.com/2018/06/19/activerecords-counter-cache.html
+- https://guides.rubyonrails.org/active_record_callbacks.html
 
 License
 ----
 
 MIT
+
+
+
 
 
