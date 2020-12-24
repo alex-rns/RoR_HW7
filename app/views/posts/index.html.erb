@@ -16,8 +16,8 @@
           <p class="card-text mb-auto mt-4 text-truncate"><%= post.content %></p>
           <div class="justify-content-between d-flex align-items-center">
               <strong class="text-muted">Views: <%= post.post_views %></strong>
-            <div class="text-right">
-              <%= link_to 'Show', post, class: "btn btn-secondary" %>
+            <div class="text-right btn-group">
+              <%= link_to 'Show', post, class: "btn btn-success" %>
               <%= link_to 'Edit', edit_post_path(post), class: "btn btn-secondary" %>
               <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure you want to delete the post?' }, class: "btn btn-danger" %>
             </div>

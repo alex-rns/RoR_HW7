@@ -27,11 +27,14 @@
 
 <div class="text-right">
   <%= form_with model: @post, local: true, html: {comment_status: 'post'}, method: :get do |form| %>
-    <span>Display comments:</span>
-    <%= form.radio_button :comment_status, :published , :onclick => "this.form.submit();"%>
-    <%= form.label :comment_status, "Published", :value => "published" %>
-    <%= form.radio_button :comment_status, :unpublished, :onclick => "this.form.submit();"%>
-    <%= form.label :comment_status, "Unpublished", :value => "unpublished" %>
+    <strong>Display comments:</strong>
+    <div class="btn-group-toggle my-2">
+      <%= form.radio_button :comment_status, :published , class: "d-none", :onclick => "this.form.submit();"%>
+      <%= form.label :comment_status, "Published", :value => "published", class: "btn btn-primary" %>
+      <%= form.radio_button :comment_status, :unpublished, class: "d-none",  :onclick => "this.form.submit();"%>
+      <%= form.label :comment_status, "Unpublished", :value => "unpublished", class: "btn btn-secondary" %>
+    </div>
+
   <% end %>
 </div>
 
