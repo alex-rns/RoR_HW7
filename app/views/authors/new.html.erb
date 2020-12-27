@@ -1,6 +1,6 @@
-<div class="row sign-wrapp d-flex justify-content-center align-items-center">
+<div class="row register-wrapp d-flex justify-content-center align-items-center">
   <div class="w-50 mx-auto">
-    <div class="card-signin">
+    <div class="register-card">
       <div class="card-body p-5">
         <h5 class="fs-2 text-center pb-3">Register</h5>
         <%= form_with(model: @author, class: "d-flex flex-column align-items-center") do |f| %>
@@ -14,29 +14,29 @@
               </ul>
             </div>
           <% end %>
-          <div class="register-form-group">
-            <div class="py-2">
-              <%= f.label :first_name, class: "pb-2 d-block" %>
+          <div class="register-form-group w-100">
+            <div class="py-2 register-form-group-item">
+              <%= f.label :first_name %>
               <%= f.text_field :first_name %>
             </div>
-            <div class="py-2">
-              <%= f.label :last_name, class: "pb-2 d-block" %>
+            <div class="py-2 register-form-group-item">
+              <%= f.label :last_name %>
               <%= f.text_field :last_name %>
             </div>
-            <div class="py-2">
-              <%= f.label :email, class: "pb-2 d-block" %>
+            <div class="py-2 register-form-group-item">
+              <%= f.label :email %>
               <%= f.text_field :email %>
             </div>
-            <div class="py-2">
-              <%= f.label :password, class: "pb-2 d-block" %>
+            <div class="py-2 register-form-group-item">
+              <%= f.label :password %>
               <%= f.password_field :password %>
             </div>
-            <div class="py-2">
-              <%= f.label :password_confirmation, class: "pb-2 d-block" %>
+            <div class="py-2 register-form-group-item">
+              <%= f.label :password_confirmation %>
               <%= f.password_field :password_confirmation %>
             </div>
-            <div class="actions py-2">
-              <%= f.submit "Sign Up", class: "btn btn-success" %>
+            <div class="py-3">
+              <%= f.submit "Sign Up", class: "btn btn-success w-100" %>
             </div>
           </div>
         <% end %>

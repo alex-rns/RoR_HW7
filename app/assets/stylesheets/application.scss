@@ -18,19 +18,37 @@
   box-shadow: none;
 }
 
-.sign-wrapp {
+.register-wrapp {
   height: calc(100vh - 100px);
 }
 
-.card-signin {
+.register-card {
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.5);
 }
 
-.register-form-group input {
-  border-radius: 2rem;
-  width: 100%;
+.register-form-group {
+  input {
+    border: none;
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+  &-item {
+    position: relative;
+    padding:15px;
+    border:2px solid;
+    margin:20px;
+  }
+  label {
+    padding: 0 5px;
+    position:absolute;
+    top:-12px;
+    left:20px;
+    background-color: #fff;
+  }
 }
 
 
