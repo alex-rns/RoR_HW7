@@ -7,27 +7,31 @@
   <div class="d-block p-3">
     <p><%= comment.body %></p>
   </div>
-  <p class="text-right fst-italic">Comment
-    <% if unpublished_comment %> created
-    <% else %> published
-    <% end %>
-    <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago</p>
+  <p class="text-right fst-italic">Comment created
+    <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago</p>
   <% if unpublished_comment %>
     <p class="alert-danger">This comment <%= comment.status %></p>
   <% end %>
-  <% if comment.author == current_author %>
-  <div class="d-block text-right mb-3 btn-group">
-    <% if unpublished_comment %>
-      <%= link_to 'Publish', post_comment_path(@post, comment,
-                                                            comment: { status: :published }),
-                  method: :patch,
-                  class: "btn btn-success" %>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <p class="alert-danger">This comment edited <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago</p>
+    <% if comment.author == current_author %>
+      <div class="d-block text-right mb-3 btn-group">
+
+        <% if unpublished_comment %>
+          <%= link_to 'Publish', post_comment_path(@post, comment,
+                                                   comment: { status: :published }),
+                      method: :patch,
+                      class: "btn btn-success" %>
+        <% end %>
+        <%= link_to 'Edit', edit_post_comment_path(comment.post, comment), class: "btn btn-secondary" %>
+        <%= link_to 'Delete', post_comment_path(@post, comment),
+                    method: :delete,
+                    data: { confirm: 'Are you sure you want to delete the comment?' },
+                    class: "btn btn-danger" %>
+      </div>
     <% end %>
-    <%= link_to 'Edit', edit_post_comment_path(comment.post, comment), class: "btn btn-secondary" %>
-    <%= link_to 'Delete', post_comment_path(@post, comment),
-                method: :delete,
-                data: { confirm: 'Are you sure you want to delete the comment?' },
-                class: "btn btn-danger" %>
   </div>
-    <% end %>
+
+
 </div>
