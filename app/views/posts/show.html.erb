@@ -18,7 +18,9 @@
 <p>
   <%= @post.content %>
 </p>
-<p class="text-right fst-italic">Post created (or updated) <%= distance_of_time_in_words(@post.updated_at, Time.now) %> ago</p>
+<p class="text-right fst-italic">Post created (or updated) <%= distance_of_time_in_words(@post.updated_at, Time.now) %>
+  ago</p>
+
 
 <div class="comments my-5">
   <h5 class="py-5 border-bottom border-dark text-center">Comments</h5>
@@ -26,20 +28,23 @@
 </div>
 
 <div class="text-right">
-  <%= form_with model: @post, local: true, html: {comment_status: 'post'}, method: :get do |form| %>
+  <%= form_with model: @post, local: true, html: { comment_status: 'post' }, method: :get do |form| %>
     <strong>Display comments:</strong>
     <div class="btn-group-toggle my-2">
-      <%= form.radio_button :comment_status, :published , class: "d-none", :onclick => "this.form.submit();"%>
-      <%= form.label :comment_status, "Published", :value => "published", class: "btn btn-primary" %>
-      <%= form.radio_button :comment_status, :unpublished, class: "d-none",  :onclick => "this.form.submit();"%>
-      <%= form.label :comment_status, "Unpublished", :value => "unpublished", class: "btn btn-secondary" %>
+      <%= form.radio_button :comment_status, :published, class: "d-none", :onclick => "this.form.submit();" %>
+      <%= form.label :comment_status, "Show published", :value => "published", class: "btn btn-primary" %>
+      <%= form.radio_button :comment_status, :unpublished, class: "d-none", :onclick => "this.form.submit();" %>
+      <%= form.label :comment_status, "Show unpublished", :value => "unpublished", class: "btn btn-secondary" %>
     </div>
-
   <% end %>
 </div>
 
 <h5> Add a comment:</h5>
-<%= render 'comments/form' %>
+<% if current_author %>
+  <%= render 'comments/form' %>
+<% else %>
+  <p class="py-4">Only registered users can leave comments</p>
+<% end %>
 
 <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-secondary" %>
 <%= link_to 'Back', posts_path, class: "btn btn-secondary" %>

@@ -1,12 +1,19 @@
 class CommentsController < ApplicationController
-  before_action :set_post, only: [:create, :update, :destroy]
-  before_action :set_comment, only: [:update, :destroy]
+  before_action :set_post, only: [:create, :edit, :update, :destroy]
+  before_action :set_comment, only: [:update, :destroy, :edit]
+
+  def new
+    @comment = Comment.new
+  end
 
   def create
     @comment = @post.comments.build(comments_params)
     @comment.author_id = current_author.id
     @comment.save
     redirect_to @post
+  end
+
+  def edit
   end
 
   def update
