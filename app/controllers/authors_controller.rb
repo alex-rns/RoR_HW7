@@ -1,7 +1,9 @@
 class AuthorsController < ApplicationController
+
   def index
     redirect_to signup_url
   end
+
   def new
     @author = Author.new
   end

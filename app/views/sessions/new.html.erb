@@ -4,16 +4,6 @@
       <div class="card-body p-5">
         <h5 class="fs-2 text-center pb-3">Log in</h5>
         <%= form_with url: sessions_path, class: "d-flex flex-column align-items-center" do |f| %>
-          <% if @session.errors.any? %>
-            <div class="error_messages">
-              <h2>Form is invalid</h2>
-              <ul>
-                <% @session.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
           <div class="register-form-group w-100">
             <div class="py-2 register-form-group-item">
               <%= f.label :email %>
