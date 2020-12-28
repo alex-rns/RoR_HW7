@@ -1,4 +1,5 @@
 <% unpublished_comment = comment.status == "unpublished" %>
+<% diff_edit_comment_time = Time.now - comment.created_at %>
 
 <div class="border-bottom border-dark mt-3">
   <strong class="mr-3">
@@ -7,24 +8,42 @@
   <div class="d-block p-3">
     <p><%= comment.body %></p>
   </div>
+
   <p class="text-right fst-italic">Comment created
     <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago</p>
+
   <% if unpublished_comment %>
-    <p class="alert-danger">This comment <%= comment.status %></p>
+    <p class="alert-danger">Comment <%= comment.status %></p>
   <% end %>
 
   <div class="d-flex justify-content-between align-items-center">
-    <p class="alert-danger">This comment edited <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago</p>
+    <% if comment.edited_at? %>
+      <p class="alert-danger">Comment edited <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago</p>
+    <% end %>
+
     <% if comment.author == current_author %>
-      <div class="d-block text-right mb-3 btn-group">
+      <div class="d-block text-right mb-3 btn-group ml-auto">
 
         <% if unpublished_comment %>
           <%= link_to 'Publish', publish_post_comment_path(@post, comment,
-                                                   comment: { status: :published }),
+                                                           comment: { status: :published }),
                       method: :post,
                       class: "btn btn-success" %>
         <% end %>
-        <%= link_to 'Edit', edit_post_comment_path(comment.post, comment), class: "btn btn-secondary" %>
+
+        <% if diff_edit_comment_time >= 1.hour %>
+          <div class="d-inline-block"
+               tabindex="0"
+               title="No editing possible - more than an hour has passed since the comment was created">
+            <%= link_to 'Edit', post_comment_path(comment.post, comment),
+                        class: "btn btn-secondary disabled",
+                        id: "btn-disabled" %>
+          </div>
+
+        <% else %>
+          <%= link_to 'Edit', edit_post_comment_path(comment.post, comment),
+                      class: "btn btn-secondary" %>
+        <% end %>
         <%= link_to 'Delete', post_comment_path(@post, comment),
                     method: :delete,
                     data: { confirm: 'Are you sure you want to delete the comment?' },
@@ -32,6 +51,8 @@
       </div>
     <% end %>
   </div>
-
-
 </div>
+
+<script type="text/javascript" charset="utf-8">
+    $('#btn-disabled').tooltip();
+</script>
