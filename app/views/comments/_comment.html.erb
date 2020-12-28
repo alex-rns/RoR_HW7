@@ -19,9 +19,9 @@
       <div class="d-block text-right mb-3 btn-group">
 
         <% if unpublished_comment %>
-          <%= link_to 'Publish', post_comment_path(@post, comment,
+          <%= link_to 'Publish', publish_post_comment_path(@post, comment,
                                                    comment: { status: :published }),
-                      method: :patch,
+                      method: :post,
                       class: "btn btn-success" %>
         <% end %>
         <%= link_to 'Edit', edit_post_comment_path(comment.post, comment), class: "btn btn-secondary" %>

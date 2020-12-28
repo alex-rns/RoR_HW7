@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_post, only: [:create, :edit, :update, :destroy]
-  before_action :set_comment, only: [:update, :destroy, :edit]
+  before_action :set_post, only: [:create, :edit, :update, :destroy, :publish]
+  before_action :set_comment, only: [:update, :destroy, :edit, :publish]
 
   def new
     @comment = Comment.new
@@ -17,8 +17,14 @@ class CommentsController < ApplicationController
   end
 
   def update
+    @comment.edited_at = Time.now
     @comment.update(comments_params)
-    redirect_to @post, notice: "Comment was published."
+    redirect_to @post, notice: "Comment was edited."
+  end
+
+  def publish
+    @comment.update(comments_params)
+    redirect_to @post, notice: "Comment was published!."
   end
 
   def destroy
