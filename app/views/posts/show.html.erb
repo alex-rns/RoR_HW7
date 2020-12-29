@@ -21,6 +21,18 @@
 <p class="text-right fst-italic">Post created (or updated) <%= distance_of_time_in_words(@post.updated_at, Time.now) %>
   ago</p>
 
+<%= link_to 'Back', posts_path, class: "btn btn-secondary" %>
+<% if @post.author == current_author%>
+  <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-secondary" %>
+<% else %>
+  <div class="d-inline-block"
+       tabindex="0"
+       title="Only the author of the post can edit and delete">
+    <%= link_to 'Edit', edit_post_path(@post),
+                class: "btn btn-secondary disabled",
+                id: "btn-disabled" %>
+  </div>
+<% end %>
 
 <div class="comments my-5">
   <h5 class="py-5 text-center">Comments</h5>
@@ -43,6 +55,3 @@
 <% else %>
   <p class="py-4">Only registered users can leave comments</p>
 <% end %>
-
-<%= link_to 'Edit', edit_post_path(@post), class: "btn btn-secondary" %>
-<%= link_to 'Back', posts_path, class: "btn btn-secondary" %>
