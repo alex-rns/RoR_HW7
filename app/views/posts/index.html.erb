@@ -28,10 +28,9 @@
                 <div class="btn-group"
                      tabindex="0"
                      title="Only the author of the post can edit and delete">
-                  <%= link_to 'Edit', edit_post_path(post),
-                              class: "btn btn-secondary disabled",
-                              id: "btn-disabled" %>
-                  <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure you want to delete the post?' }, class: "btn btn-danger disabled" %>
+                  <%= link_to 'Edit', home_path,
+                              class: "btn btn-secondary disabled" %>
+                  <%= link_to 'Delete', home_path, class: "btn btn-danger disabled" %>
                 </div>
               <% end %>
             </div>
