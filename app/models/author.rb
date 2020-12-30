@@ -26,6 +26,7 @@ class Author < ApplicationRecord
   before_save { self.last_name = last_name.capitalize }
   has_many :posts
   has_many :comments
+  has_one_attached :avatar
 
   def name_with_initial
     "#{first_name.first}. #{last_name}"
