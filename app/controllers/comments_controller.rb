@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_post, only: [:create, :edit, :update, :destroy, :publish]
   before_action :set_comment, only: [:update, :destroy, :edit, :publish]
+  before_action :set_cookies
 
   def new
     @comment = Comment.new
@@ -33,6 +34,12 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def set_cookies
+    unless current_author
+      cookies[:views] = cookies[:views] ? cookies[:views].to_i + 1 : 1
+    end
+  end
 
   def set_post
     @post = Post.find(params[:post_id])

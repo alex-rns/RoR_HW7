@@ -52,5 +52,12 @@
 <div class="container mb-5">
   <%= yield %>
 </div>
+<% if cookies[:views].to_i == 5 %>
+  <script type="text/javascript">
+      $('#myModal').modal()
+  </script>
+  <% cookies.delete(:views) %>
+<% end %>
+<%= render 'layouts/modal_offer_sign_in' %>
 </body>
 </html>

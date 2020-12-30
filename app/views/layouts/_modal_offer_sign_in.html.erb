@@ -1,0 +1,15 @@
+<div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please log in</h5>
+      </div>
+      <div class="modal-body">
+        <%= render 'sessions/form' %>
+      </div>
+      <div class="text-center border-top border-dark my-3 pt-3">
+        <%= link_to "Register", signup_path, class: "btn btn-success" %>
+      </div>
+    </div>
+  </div>
+</div>

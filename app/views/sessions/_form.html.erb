@@ -1,0 +1,15 @@
+<%= form_with url: sessions_path, class: "d-flex flex-column align-items-center" do |f| %>
+  <div class="register-form-group w-100">
+    <div class="py-2 register-form-group-item">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+    <div class="py-2 register-form-group-item">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+    <div class="py-3">
+      <%= f.submit "Log in", class: "btn btn-success w-100" %>
+    </div>
+  </div>
+<% end %>

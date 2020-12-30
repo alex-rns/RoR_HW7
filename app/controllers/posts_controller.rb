@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_cookies
 
   # GET /posts
   # GET /posts.json
@@ -12,10 +13,10 @@ class PostsController < ApplicationController
   def show
     @post.increment!(:post_views)
     @comments = if params.dig(:post, :comment_status) == "unpublished"
-      @post.comments.unpublished
-    else
-      @post.comments.published
-    end
+                  @post.comments.unpublished
+                else
+                  @post.comments.published
+                end
   end
 
   # GET /posts/new
@@ -74,6 +75,12 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def set_cookies
+    unless current_author
+      cookies[:views] = cookies[:views] ? cookies[:views].to_i + 1 : 1
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
