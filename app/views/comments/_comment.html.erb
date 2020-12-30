@@ -3,6 +3,7 @@
 
 <div class="border-bottom border-dark mt-3">
   <strong class="mr-3">
+    <%= image_tag comment.author.avatar.variant(resize_to_limit: [40, 40]) if @post.author.avatar.present?%>
     <%= comment.author.first_name %> <%= comment.author.last_name %>:
   </strong>
   <div class="d-block p-3">
