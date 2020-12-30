@@ -1,4 +1,5 @@
 class AuthorsController < ApplicationController
+  before_action :set_author, only: [:edit, :update]
 
   def index
     redirect_to signup_url
@@ -6,6 +7,21 @@ class AuthorsController < ApplicationController
 
   def new
     @author = Author.new
+  end
+
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @author.update(author_params)
+        format.html { redirect_to profile_path, notice: "Profile was edited." }
+        format.json { render profile_path, status: :ok, location: profile_path }
+      else
+        format.html { render :edit }
+        format.json { render json: @author.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def create
@@ -21,7 +37,11 @@ class AuthorsController < ApplicationController
   private
 
   def author_params
-    params.require(:author).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:author).permit(:first_name, :last_name, :email, :password, :password_confirmation, :gender, :birthday)
+  end
+
+  def set_author
+    @author = current_author
   end
 
 end

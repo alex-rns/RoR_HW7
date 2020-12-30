@@ -14,10 +14,11 @@ class Author < ApplicationRecord
   end
 
   has_secure_password
-  validates :first_name, :last_name, :email, :password, presence: true
-  validates :password, length: {minimum: 8}
-  validate :password_requirements_are_met
-  validates_format_of :email, with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
+  validates :first_name, :last_name, :email, :password, presence: true, on: :create
+  validates :first_name, :last_name, presence: true, on: :update
+  validates :password, length: {minimum: 8}, on: :create
+  validate :password_requirements_are_met, on: :create
+  validates_format_of :email, with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/, on: :create
   validates_uniqueness_of :email, case_sensitive: false
 
   before_save { self.email = email.downcase }

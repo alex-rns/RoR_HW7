@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'authors#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
+  get 'profile', to: 'authors#edit', as: 'profile'
   resources :posts do
     resources :comments do
       member do
