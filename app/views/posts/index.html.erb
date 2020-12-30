@@ -2,42 +2,47 @@
 <div class="text-right">
   <%= link_to 'New Post', new_post_path, class: "btn btn-success" if current_author %>
 </div>
-<% @posts.each do |post| %>
-  <div class="row my-5">
-    <div class="col-">
-      <div class="card flex-md-row mb-4 box-shadow">
-        <%= image_tag(post.image.present? ? post.image : "/placeholder-posts.png", height: "200", width: "250", alt: "Post image", class: "") %>
-        <div class="card-body d-flex flex-column overflow-hidden">
-          <div class="justify-content-between d-flex">
-            <strong class="mb-1 text-muted fst-italic"><%= distance_of_time_in_words(post.updated_at, Time.now) %>
-              ago</strong>
-            <strong class="mb-2 text-primary"><%= post.name %></strong>
-          </div>
-          <h2 class="mb-0">
-            <%= link_to post.title, post, class: "text-decoration-none" %>
-          </h2>
-          <p class="card-text mb-auto mt-4 text-truncate"><%= post.content %></p>
-          <div class="justify-content-between d-flex align-items-center">
-            <strong class="text-muted">Views: <%= post.post_views %></strong>
-            <div class="text-right btn-group">
-              <%= link_to 'Show', post, class: "btn btn-success" %>
-              <% if post.author == current_author %>
-                <%= link_to 'Edit', edit_post_path(post), class: "btn btn-secondary" %>
-                <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure you want to delete the post?' }, class: "btn btn-danger" %>
-              <% else %>
-                <div class="btn-group"
-                     tabindex="0"
-                     title="Only the author of the post can edit and delete">
-                  <%= link_to 'Edit', home_path, class: "btn btn-secondary disabled" %>
-                  <%= link_to 'Delete', home_path, class: "btn btn-danger disabled" %>
-                </div>
-              <% end %>
+<% if @posts.empty? %>
+  <div class="text-center">
+    <h2>No posts found :(</h2>
+  </div>
+<% else %>
+  <% @posts.each do |post| %>
+    <div class="row my-5">
+      <div class="col-">
+        <div class="card flex-md-row mb-4 box-shadow">
+          <%= image_tag(post.image.present? ? post.image : "/placeholder-posts.png", height: "200", width: "250", alt: "Post image", class: "") %>
+          <div class="card-body d-flex flex-column overflow-hidden">
+            <div class="justify-content-between d-flex">
+              <strong class="mb-1 text-muted fst-italic"><%= distance_of_time_in_words(post.updated_at, Time.now) %>
+                ago</strong>
+              <strong class="mb-2 text-primary"><%= post.name %></strong>
+            </div>
+            <h2 class="mb-0">
+              <%= link_to post.title, post, class: "text-decoration-none" %>
+            </h2>
+            <p class="card-text mb-auto mt-4 text-truncate"><%= post.content %></p>
+            <div class="justify-content-between d-flex align-items-center">
+              <strong class="text-muted">Views: <%= post.post_views %></strong>
+              <div class="text-right btn-group">
+                <%= link_to 'Show', post, class: "btn btn-success" %>
+                <% if post.author == current_author %>
+                  <%= link_to 'Edit', edit_post_path(post), class: "btn btn-secondary" %>
+                  <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure you want to delete the post?' }, class: "btn btn-danger" %>
+                <% else %>
+                  <div class="btn-group"
+                       tabindex="0"
+                       title="Only the author of the post can edit and delete">
+                    <%= link_to 'Edit', home_path, class: "btn btn-secondary disabled" %>
+                    <%= link_to 'Delete', home_path, class: "btn btn-danger disabled" %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
-
 <%= link_to 'New Post', new_post_path, class: "btn btn-secondary" %>

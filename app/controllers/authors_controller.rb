@@ -43,5 +43,4 @@ class AuthorsController < ApplicationController
   def set_author
     @author = current_author
   end
-
 end

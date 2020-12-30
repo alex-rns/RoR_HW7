@@ -68,6 +68,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    @posts = Post.where('content ILIKE ? OR title ILIKE ?', "%#{params[:query]}%", "%#{params[:query]}%")
+    render :index
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

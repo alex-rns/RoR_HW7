@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         post :publish
       end
     end
+    get 'search', on: :collection
   end
   resources :authors
   resources :sessions
