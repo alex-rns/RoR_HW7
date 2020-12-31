@@ -13,10 +13,10 @@ class PostsController < ApplicationController
   def show
     @post.increment!(:post_views)
     @comments = if params.dig(:post, :comment_status) == "unpublished"
-                  @post.comments.unpublished
-                else
-                  @post.comments.published
-                end
+      @post.comments.unpublished
+    else
+      @post.comments.published
+    end
   end
 
   # GET /posts/new
@@ -70,7 +70,7 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.where('content ILIKE ? OR title ILIKE ?', "%#{params[:query]}%", "%#{params[:query]}%")
+    @posts = Post.where("content ILIKE ? OR title ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
     render :index
   end
 

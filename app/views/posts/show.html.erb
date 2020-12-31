@@ -23,7 +23,7 @@
   ago</p>
 
 <%= link_to 'Back', posts_path, class: "btn btn-secondary" %>
-<% if @post.author == current_author%>
+<% if @post.author == current_author %>
   <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-secondary" %>
 <% else %>
   <div class="d-inline-block"

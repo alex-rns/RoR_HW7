@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
   root "posts#index", as: "home"
-  get 'signup', to: 'authors#new', as: 'signup'
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
-  get 'profile', to: 'authors#edit', as: 'profile'
+  get "signup", to: "authors#new", as: "signup"
+  get "login", to: "sessions#new", as: "login"
+  get "logout", to: "sessions#destroy", as: "logout"
+  get "profile", to: "authors#edit", as: "profile"
   resources :posts do
     resources :comments do
       member do
         post :publish
       end
     end
-    get 'search', on: :collection
+    get "search", on: :collection
   end
   resources :authors
   resources :sessions

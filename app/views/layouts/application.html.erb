@@ -15,7 +15,7 @@
   <% if current_author %>
     <div class="ml-3 d-flex align-items-center text-nowrap">
       <p class="m-0 fs-5">Logged in as <%= current_author.name_with_initial %></p>
-      <%= image_tag current_author.avatar.variant(resize_to_limit: [50, 50]), class: "img-fluid px-3" if current_author.avatar.present?%>
+      <%= image_tag current_author.avatar.variant(resize_to_limit: [50, 50]), class: "img-fluid px-3" if current_author.avatar.present? %>
     </div>
   <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
 </div>
 <% if cookies[:views].to_i == 5 %>
   <script type="text/javascript">
-      $('#myModal').modal()
+      $('#logInModal').modal()
   </script>
   <% cookies.delete(:views) %>
 <% end %>
