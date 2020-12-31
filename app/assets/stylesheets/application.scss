@@ -11,8 +11,8 @@
  * It is generally better to create a new file per style scope.
  *
  */
+// = require actiontext
 @import "bootstrap";
-//@import "posts";
 
 .navbar-toggler:focus {
   box-shadow: none;
