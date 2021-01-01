@@ -1,5 +1,5 @@
-<h1 class="mt-3">New Post</h1>
+<%= link_to 'Back', posts_path, class: "btn btn-secondary my-3" %>
+<h1 class="mt-3 text-center">New Post</h1>
 
 <%= render 'form', post: @post %>
 
-<%= link_to 'Back', posts_path, class: "btn btn-secondary" %>

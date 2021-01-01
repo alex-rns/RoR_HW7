@@ -1,6 +1,7 @@
-<h1 class="mt-3">Editing Post</h1>
+<%= link_to 'Back', posts_path, class: "btn btn-secondary my-3" %>
+<%= link_to 'Show post', @post, class: "btn btn-secondary my-3" %>
+<h1 class="mt-3 text-center">Editing Post</h1>
 
 <%= render 'form', post: @post %>
 
-<%= link_to 'Show', @post, class: "btn btn-secondary" %>
-<%= link_to 'Back', posts_path, class: "btn btn-secondary" %>
+
