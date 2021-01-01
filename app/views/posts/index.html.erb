@@ -17,13 +17,14 @@
               <strong class="mb-1 text-muted fst-italic"><%= distance_of_time_in_words(post.updated_at, Time.now) %>
                 ago</strong>
               <div>
-                <strong class="mb-2 text-primary"><%= post.name %></strong>
+                <%= image_tag post.author.avatar.variant(resize_to_limit: [45, 45]) if post.author.avatar.present? %>
+                <strong class="mb-2 text-primary"><%= post.author.name_with_initial %></strong>
               </div>
             </div>
             <h2 class="mb-0">
               <%= link_to post.title, post, class: "text-decoration-none" %>
             </h2>
-            <p class="card-text mb-auto mt-4 text-truncate"><%= post.content %></p>
+            <div class="card-text mb-auto mt-2 text-truncate"><%= post.content %></div>
             <div class="justify-content-between d-flex align-items-center">
               <strong class="text-muted">Views: <%= post.post_views %></strong>
               <div class="text-right btn-group mt-2">

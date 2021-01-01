@@ -4,7 +4,7 @@
   <p>
     <%= image_tag @post.author.avatar.variant(resize_to_limit: [100, 100]) if @post.author.avatar.present? %>
     <strong>Author:</strong>
-    <%= @post.name %>
+    <%= @post.author.name_with_initial %>
   </p>
 </div>
 

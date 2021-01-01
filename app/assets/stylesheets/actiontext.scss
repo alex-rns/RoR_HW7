@@ -11,21 +11,31 @@
 
 .card-body {
   .trix-content {
-    display: none;
+    max-height: 50px;
+    div {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    img {
+      display: none;
+    }
   }
 }
 .trix-content {
   img {
     width: 30%;
-
     margin: 20px 0;
   }
+
   .attachment--preview {
     text-align: left;
   }
+
   .attachment__caption {
     display: none;
   }
+
   .attachment-gallery {
     > action-text-attachment,
     > .attachment {
@@ -57,6 +67,7 @@ trix-editor {
     max-width: 300px;
     max-height: 200px;
   }
+
   &.form-control {
     height: auto;
   }
@@ -66,9 +77,11 @@ trix-editor {
   .attachment--preview {
     margin: 0.5em 0;
   }
+
   .attachment--preview {
     width: 100%;
   }
+
   .attachment {
     display: inline-block;
     position: relative;
