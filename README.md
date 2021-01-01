@@ -56,9 +56,6 @@ This project was created to practice ruby.
 
 ![site_screen](https://user-images.githubusercontent.com/23439223/102992569-1e095780-4524-11eb-9c8c-96576873faa7.png)
 
-## Description
-This project was created to practice ruby.
-
 ## Assigned task
 
 Используя ваш текущий проект (блог) расширить его.
@@ -82,6 +79,55 @@ This project was created to practice ruby.
 10) Добавить хелпер distance_of_time_in_words для отображения на странице даты обновления (updated_at) поля постов и комментариев
 11) Добавить counter_cache для постов и выводить результат на списке постов (показывать кол-во просмотров поста)
 
+
+## Literature
+
+- https://api.rubyonrails.org/v5.2.4.4/classes/ActiveRecord/Enum.html
+- https://apidock.com/rails/ActionView/Helpers/DateHelper/distance_of_time_in_words
+- https://guides.rubyonrails.org/association_basics.html
+- https://blog.appsignal.com/2018/06/19/activerecords-counter-cache.html
+- https://guides.rubyonrails.org/active_record_callbacks.html
+
+# **GeekHub X | RoR | Homework 9**
+
+![site_screen](https://user-images.githubusercontent.com/23439223/103435429-209c3900-4c17-11eb-8735-9b4c6e1ff406.png)
+
+## Assigned task
+
+Используя ваш текущий проект (блог) расширить его.
+
+## Steps
+
+1. Сделать систему авторизации для Author.
+   Сделать возможность регистрации, входа и выхода (готовые гемы не использовать).
+   К предыдущим полям добавляем email и password. Использовать валидацию формата email(через REGEXP) и его уникальности и пароля – не менее 8 символов, должен содержать маленькую латинскую букву, большую, цифру и спец символ.
+2. Авторизованный автор может создавать посты.
+   Не авторизованный пользователь может только просматривать статьи и комментарии к ним.
+   Автор может редактировать только свои посты.
+3. Проапдейтить модель комментариев. Оставлять комментарий может только авторизированный пользователь (поле для ввода комментария отсутствует, вывести заметочку - только зарегистрированные пользователи могут оставлять комментарии)
+   Автор может редактировать только свои комментарии и только такие, от создания которых не прошло более часа.
+4. Отредактированные комментарии помечать словом (edited). Edited должно выделяться.
+5. Если пользователь не авторизован, спустя 5 переходов по сайту с помощью всплывающего модульного окна предлагать войти или авторизоваться. Реализовать через куки и after_filter
+6. Реализовать поиск по постам (простой, через LIKE / ILIKE). Выдавать посты, где фраза есть в тексте поста и/или в тайтле.
+7. Сделать Блог более красивым :) Подумать о UX/UI.
+8. Сделать простеньку страничку для профиля автора где только он сможет сменить себе Имя Фамилию. Ограничить возможность редактирования данных другого автора через изменения ссылки в браузере.
+9. Сделать возможность устанавливать и изменять аватарку автора через страничку профиля.
+10. Сделать вывод аватарки пользователя на странице с постом
+11. Если позволяет UI сделать вывод маленькой аватарочки авторизованного пользователя в его комментарии
+12. Сделать возможность добавления картинок для поста и вывод их на странице(продумайте где и как их наиболее красиво вывести)
+13. *Задание опциональное, можно попробовать когда все сделали, и хочеться поразбираться и попробовать свои силы. Прикрутить внешнее хранение для ваших файлов(amazon ,google drive, etc...)
+
+
+## Literature
+
+- https://guides.rubyonrails.org/action_view_helpers.html - про вьюшные хелперы
+- https://guides.rubyonrails.org/form_helpers.html - про хелперы формы
+- https://guides.rubyonrails.org/routing.html - про роутинг
+- https://guides.rubyonrails.org/active_storage_overview.html - про актив сторедж
+  
+- Ознакомиться с http://railscasts.com/episodes/250-authentication-from-scratch-revised. Использовать для помощи в решении написании регистрации/авторизации.
+
+
 ## Requirements
 
 - Ruby 2.7.0
@@ -93,15 +139,14 @@ This project was created to practice ruby.
 
 Clone this repository into your computer:
 ```sh
-$ git clone https://github.com/alex-rns/RoR_HW7_HW8
+$ git clone https://github.com/alex-rns/RoR_blog
 ```
-or download from [git](https://github.com/alex-rns/RoR_HW7_HW8)
+or download from [git](https://github.com/alex-rns/RoR_blog)
 
 ## How to start
 
     $ bundle install
     $ rake db:migrate
-    $ rake db:seed
     $ rails s
 
 - Open your browser and type `localhost:3000`
@@ -114,15 +159,6 @@ or download from [git](https://github.com/alex-rns/RoR_HW7_HW8)
 - rails
 - postgresql
 - bootstrap
-- gem "faker"
-
-## Literature
-
-- https://api.rubyonrails.org/v5.2.4.4/classes/ActiveRecord/Enum.html
-- https://apidock.com/rails/ActionView/Helpers/DateHelper/distance_of_time_in_words
-- https://guides.rubyonrails.org/association_basics.html
-- https://blog.appsignal.com/2018/06/19/activerecords-counter-cache.html
-- https://guides.rubyonrails.org/active_record_callbacks.html
 
 License
 ----
