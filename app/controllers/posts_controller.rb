@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :set_cookies
+  before_action :check_current_author, only: [:new, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
@@ -21,7 +22,9 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    # unless current_author
     @post = Post.new
+    # end
   end
 
   # GET /posts/1/edit
@@ -79,6 +82,12 @@ class PostsController < ApplicationController
   def set_cookies
     unless current_author
       cookies[:views] = cookies[:views] ? cookies[:views].to_i + 1 : 1
+    end
+  end
+
+  def check_current_author
+    unless current_author
+      redirect_to home_url
     end
   end
 
