@@ -6,7 +6,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.order(updated_at: :desc, created_at: :desc)
+    # @posts = Post.all.order(updated_at: :desc, created_at: :desc)
+    @posts = Post.all.order(updated_at: :desc, created_at: :desc).paginate(page: params[:page], per_page: 8)
   end
 
   # GET /posts/1
@@ -14,17 +15,15 @@ class PostsController < ApplicationController
   def show
     @post.increment!(:post_views)
     @comments = if params.dig(:post, :comment_status) == "unpublished"
-      @post.comments.unpublished
-    else
-      @post.comments.published
-    end
+                  @post.comments.unpublished
+                else
+                  @post.comments.published
+                end
   end
 
   # GET /posts/new
   def new
-    # unless current_author
     @post = Post.new
-    # end
   end
 
   # GET /posts/1/edit
