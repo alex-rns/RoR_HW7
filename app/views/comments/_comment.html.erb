@@ -1,7 +1,7 @@
 <% unpublished_comment = comment.status == "unpublished" %>
 <% diff_edit_comment_time = Time.now - comment.created_at %>
 
-<div class="border-bottom border-dark mt-3">
+<div class="border border-dark mt-3">
   <strong class="mr-3">
     <%= image_tag comment.author.avatar.variant(resize_to_limit: [40, 40]), class: "mr-3" if comment.author.avatar.present? %>
     <%= comment.author.first_name %> <%= comment.author.last_name %>
@@ -50,4 +50,5 @@
       </div>
     <% end %>
   </div>
+  <%= nested_comment comment.children %>
 </div>
