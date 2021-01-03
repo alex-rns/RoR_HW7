@@ -47,12 +47,17 @@
       </div>
     <% end %>
   </div>
-  <%= render @comments %>
+  <% @comments.each do |comment| %>
+    <div>
+      <%= render 'comments/comment', comments: comment.subtree.arrange %>
+    </div>
+  <% end %>
+  <%= render 'comments/form', comment_id: nil %>
 </div>
 
-<h5> Add a comment:</h5>
-<% if current_author %>
-  <%= render 'comments/form' %>
-<% else %>
-  <p class="py-4">Only registered users can leave comments</p>
-<% end %>
+<!--<h5> Add a comment:</h5>-->
+<%# if current_author %>
+  <%#= render 'comments/form' %>
+<%# else %>
+<!--  <p class="py-4">Only registered users can leave comments</p>-->
+<%# end %>

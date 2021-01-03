@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     @comments = if params.dig(:post, :comment_status) == "unpublished"
                   @post.comments.unpublished
                 else
-                  @post.comments.published
+                  @post.comments.roots.published
                 end
   end
 
