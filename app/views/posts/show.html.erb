@@ -37,7 +37,7 @@
 
 <div class="comments my-5">
   <h5 class="py-5 text-center">Comments</h5>
-  <div class="text-right pb-4 border-bottom border-dark ">
+  <div class="text-right pb-4">
     <%= form_with model: @post, local: true, html: { comment_status: 'post' }, method: :get do |form| %>
       <div class="btn-group-toggle my-2">
         <%= form.radio_button :comment_status, :published, class: "d-none", :onclick => "this.form.submit();" %>
@@ -52,12 +52,12 @@
       <%= render 'comments/comment', comments: comment.subtree.arrange %>
     </div>
   <% end %>
-  <%= render 'comments/form', comment_id: nil %>
+  <h5 class="mt-5"> Add a new comment:</h5>
+  <% if current_author %>
+    <%= render 'comments/form', comment_id: nil %>
+  <% else %>
+    <p class="py-4">Only registered users can leave comments</p>
+  <% end %>
 </div>
 
-<!--<h5> Add a comment:</h5>-->
-<%# if current_author %>
-  <%#= render 'comments/form' %>
-<%# else %>
-<!--  <p class="py-4">Only registered users can leave comments</p>-->
-<%# end %>
+

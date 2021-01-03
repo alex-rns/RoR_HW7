@@ -13,8 +13,12 @@
  */
 // = require actiontext
 // = require pagination
+// = require comments
 @import "bootstrap";
 
+body {
+  background-color: #eaeaea;
+}
 .navbar-toggler:focus {
   box-shadow: none;
 }
@@ -26,9 +30,8 @@
 .register-card {
   border: 0;
   border-radius: 1rem;
-  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.5);
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0 inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
-
 .register-form-group {
   input {
     border: none;
@@ -52,7 +55,3 @@
   }
 }
 
-
-.nested-comment {
-  padding: 30px;
-}
