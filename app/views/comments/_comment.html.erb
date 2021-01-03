@@ -23,9 +23,9 @@
       <% if parent.edited_at? %>
         <p class="alert-danger">Comment edited <%= distance_of_time_in_words(parent.updated_at, Time.now) %> ago</p>
       <% end %>
+      <div class="d-block text-right mb-3 btn-group ml-auto">
 
-      <% if parent.author == current_author %>
-        <div class="d-block text-right mb-3 btn-group ml-auto">
+        <% if parent.author == current_author %>
 
           <% if unpublished_comment %>
             <%= link_to 'Publish', publish_post_comment_path(@post, parent, comment: { status: :published }),
@@ -49,14 +49,26 @@
                       method: :delete,
                       data: { confirm: 'Are you sure you want to delete the comment?' },
                       class: "btn btn-danger" %>
+
+        <% else %>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse_<%= parent.id %>" aria-expanded="false">
+            Reply
+          </button>
+          </div>
+        <% end %>
+
         </div>
-      <% end %>
-    </div>
-    <% if current_author %>
+
+
+    <div class="collapse" id="collapse_<%= parent.id %>">
       <%= render 'comments/form', comment_id: parent.id unless unpublished_comment %>
-    <% else %>
-      <p class="py-4">Only registered users can leave comments</p>
-    <% end %>
+    </div>
+
+    <%# if current_author %>
+    <%#= render 'comments/form', comment_id: parent.id unless unpublished_comment %>
+    <%# else %>
+    <!--      <p class="py-4">Only registered users can leave comments</p>-->
+    <%# end %>
 
     <%= render 'comments/comment', comments: children %>
   </div>

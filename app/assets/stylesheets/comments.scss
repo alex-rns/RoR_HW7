@@ -5,11 +5,14 @@
 .nested-comment {
   border-radius: 1em;
   background: #fff;
-  padding: 1em;
+  padding: 1em 0 0.5em 1em;
   margin-bottom: 1em;
   &:not(:first-child) {
     margin-left: 3em;
     border-left: 2px solid #eaeaea;
     border-top: 2px solid #eaeaea;
+  }
+  &:first-child {
+    padding-right: 1em;
   }
 }
