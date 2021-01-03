@@ -22,10 +22,12 @@
     <div class="d-flex justify-content-between align-items-center">
       <% if parent.edited_at? %>
         <p class="alert-danger">Comment edited <%= distance_of_time_in_words(parent.updated_at, Time.now) %> ago</p>
+      <% else %>
+        <p></p>
       <% end %>
-      <div class="d-block text-right mb-3 btn-group ml-auto">
 
-        <% if parent.author == current_author %>
+      <% if parent.author == current_author %>
+        <div class="d-block text-right mb-3 btn-group ml-auto">
 
           <% if unpublished_comment %>
             <%= link_to 'Publish', publish_post_comment_path(@post, parent, comment: { status: :published }),
@@ -42,6 +44,7 @@
             </div>
 
           <% else %>
+
             <%= link_to 'Edit', edit_post_comment_path(parent.post, parent),
                         class: "btn btn-secondary" %>
           <% end %>
@@ -49,18 +52,27 @@
                       method: :delete,
                       data: { confirm: 'Are you sure you want to delete the comment?' },
                       class: "btn btn-danger" %>
-
-        <% else %>
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse_<%= parent.id %>" aria-expanded="false">
-            Reply
-          </button>
-          </div>
-        <% end %>
         </div>
+      <% else %>
+        <div class="">
+          <% unless unpublished_comment %>
+            <button class="btn btn-primary mb-4" type="button" data-toggle="collapse" data-target="#collapse_<%= parent.id %>" aria-expanded="false">
+              Reply
+            </button>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
     <div class="collapse" id="collapse_<%= parent.id %>">
       <%= render 'comments/form', comment_id: parent.id unless unpublished_comment %>
     </div>
+
+    <% if flash[:comment_error].present? && flash[:comment_id].to_i == parent.id %>
+          <div id="error_explanation">
+            <p class="alert alert-danger"><%= flash[:comment_error] %></p>
+          </div>
+    <% end %>
 
     <%= render 'comments/comment', comments: children %>
   </div>
