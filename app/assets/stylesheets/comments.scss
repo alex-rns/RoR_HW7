@@ -9,8 +9,7 @@
   margin-bottom: 1em;
   &:not(:first-child) {
     margin-left: 3em;
-    border-left: 2px solid #eaeaea;
-    border-top: 2px solid #eaeaea;
+    box-shadow: -13px -12px 10px 3px rgba(234, 234, 234, 1);
   }
   &:first-child {
     padding-right: 1em;

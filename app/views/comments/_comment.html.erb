@@ -56,19 +56,11 @@
           </button>
           </div>
         <% end %>
-
         </div>
-
 
     <div class="collapse" id="collapse_<%= parent.id %>">
       <%= render 'comments/form', comment_id: parent.id unless unpublished_comment %>
     </div>
-
-    <%# if current_author %>
-    <%#= render 'comments/form', comment_id: parent.id unless unpublished_comment %>
-    <%# else %>
-    <!--      <p class="py-4">Only registered users can leave comments</p>-->
-    <%# end %>
 
     <%= render 'comments/comment', comments: children %>
   </div>
