@@ -4,10 +4,18 @@
   <% diff_edit_comment_time = Time.now - parent.created_at %>
 
   <div class="nested-comment">
-    <strong class="mr-3">
-      <%= image_tag parent.author.avatar.variant(resize_to_limit: [40, 40]), class: "mr-3" if parent.author.avatar.present? %>
-      <%= parent.author.first_name %> <%= parent.author.last_name %>
-    </strong>
+    <div class="comment-header d-flex justify-content-between">
+      <strong class="mr-3">
+        <%= image_tag parent.author.avatar.variant(resize_to_limit: [40, 40]), class: "mr-3" if parent.author.avatar.present? %>
+        <%= parent.author.first_name %> <%= parent.author.last_name %>
+      </strong>
+      <div>
+        <%= parent.votes.count %>
+        <%= link_to 'Like', post_comment_votes_path(@post, parent), method: :post, class: 'btn btn-success btn-sm' %>
+      </div>
+    </div>
+
+
     <div class="d-block p-3">
       <p><%= parent.body %></p>
     </div>

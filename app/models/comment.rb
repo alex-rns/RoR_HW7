@@ -1,5 +1,6 @@
 class Comment < ApplicationRecord
   has_ancestry
+  has_many :votes, dependent: :destroy
   belongs_to :post, counter_cache: true
   belongs_to :author
   enum status: [:unpublished, :published]

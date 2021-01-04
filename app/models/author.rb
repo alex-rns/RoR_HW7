@@ -27,6 +27,7 @@ class Author < ApplicationRecord
   has_many :posts
   has_many :comments
   has_one_attached :avatar
+  has_many :votes
 
   def name_with_initial
     "#{first_name.first}. #{last_name}"
