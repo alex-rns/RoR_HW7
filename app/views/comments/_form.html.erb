@@ -4,7 +4,7 @@
   <div class="field py-2">
     <%= form.text_area :body, class: "form-control" %>
   </div>
-  <%= form.hidden_field :parent_id, value: comment_id if comment_id.present? %>
+  <%= form.hidden_field :parent_id, value: params[:comment_id] if params[:comment_id].present? %>
 
   <div class="actions py-2">
     <%= form.submit(class: "btn btn-success") %>

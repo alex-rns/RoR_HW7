@@ -54,24 +54,18 @@
                       class: "btn btn-danger" %>
         </div>
       <% else %>
-        <div class="">
-          <% unless unpublished_comment %>
-            <button class="btn btn-primary mb-4" type="button" data-toggle="collapse" data-target="#collapse_<%= parent.id %>" aria-expanded="false">
-              Reply
-            </button>
-          <% end %>
-        </div>
       <% end %>
     </div>
-
-    <div class="collapse" id="collapse_<%= parent.id %>">
-      <%= render 'comments/form', comment_id: parent.id unless unpublished_comment %>
-    </div>
+    <% unless unpublished_comment || current_author == parent.author %>
+      <div id="comment-reply-<%= parent.id %>" class="comment-reply">
+        <%= link_to 'Reply', new_post_comment_path(@post, comment_id: parent.id), remote: true, class: "btn btn-primary mb-4" if current_author %>
+      </div>
+    <% end %>
 
     <% if flash[:comment_error].present? && flash[:comment_id].to_i == parent.id %>
-          <div id="error_explanation">
-            <p class="alert alert-danger"><%= flash[:comment_error] %></p>
-          </div>
+      <div id="error_explanation">
+        <p class="alert alert-danger"><%= flash[:comment_error] %></p>
+      </div>
     <% end %>
 
     <%= render 'comments/comment', comments: children %>
