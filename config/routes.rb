@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         post :publish
       end
       resources :votes
+      post 'dislikes' => 'votes#dislike'
     end
     get "search", on: :collection
   end

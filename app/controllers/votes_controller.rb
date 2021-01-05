@@ -3,8 +3,21 @@ class VotesController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:comment_id])
-    @comment.votes.create!(author: current_author, vote_value: 1)
-    redirect_to @post
+    if @comment.votes.create!(author: current_author, vote_value: 1)
+      render 'votes/vote'
+    else
+      redirect_to @post
+    end
+  end
+
+  def dislike
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:comment_id])
+    if @comment.votes.create!(author: current_author, vote_value: -1)
+      render 'votes/vote'
+    else
+      redirect_to @post
+    end
   end
 
   private

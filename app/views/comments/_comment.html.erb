@@ -7,9 +7,16 @@
       <%= image_tag comment.author.avatar.variant(resize_to_limit: [40, 40]), class: "mr-3" if comment.author.avatar.present? %>
       <%= comment.author.first_name %> <%= comment.author.last_name %>
     </strong>
+
     <div>
       total votes:<%= comment.votes.count %>
-      <%= link_to 'Like', post_comment_votes_path(@post, comment), method: :post, class: 'btn btn-success btn-sm' %>
+      rating:<%= comment.votes.map(&:vote_value).sum %>
+      <% if comment.votes.find { |vote| vote.author_id == current_author.id } %>
+        <p>you have already voted</p>
+      <% else %>
+        <%= link_to 'Like', post_comment_votes_path(@post, comment), remote: true, method: :post, class: 'btn btn-success btn-sm' %>
+        <%= link_to 'Dislike', post_comment_dislikes_path(@post, comment), remote: true, method: :post, class: 'btn btn-success btn-sm' %>
+      <% end %>
     </div>
   </div>
 
