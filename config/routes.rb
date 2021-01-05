@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'votes/create'
-  get 'votes/destroy'
   root "posts#index", as: "home"
   get "signup", to: "authors#new", as: "signup"
   get "login", to: "sessions#new", as: "login"

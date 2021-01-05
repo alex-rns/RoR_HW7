@@ -1,81 +1,75 @@
-<% comments.each do |parent, children| %>
+<% unpublished_comment = comment.status == "unpublished" %>
+<% diff_edit_comment_time = Time.now - comment.created_at %>
 
-  <% unpublished_comment = parent.status == "unpublished" %>
-  <% diff_edit_comment_time = Time.now - parent.created_at %>
-
-  <div class="nested-comment">
-    <div class="comment-header d-flex justify-content-between">
-      <strong class="mr-3">
-        <%= image_tag parent.author.avatar.variant(resize_to_limit: [40, 40]), class: "mr-3" if parent.author.avatar.present? %>
-        <%= parent.author.first_name %> <%= parent.author.last_name %>
-      </strong>
-      <div>
-        <%= parent.votes.count %>
-        <%= link_to 'Like', post_comment_votes_path(@post, parent), method: :post, class: 'btn btn-success btn-sm' %>
-      </div>
+<div id="comment-<%= comment.id %>">
+  <div class="comment-header d-flex justify-content-between">
+    <strong class="mr-3">
+      <%= image_tag comment.author.avatar.variant(resize_to_limit: [40, 40]), class: "mr-3" if comment.author.avatar.present? %>
+      <%= comment.author.first_name %> <%= comment.author.last_name %>
+    </strong>
+    <div>
+      total votes:<%= comment.votes.count %>
+      <%= link_to 'Like', post_comment_votes_path(@post, comment), method: :post, class: 'btn btn-success btn-sm' %>
     </div>
-
-
-    <div class="d-block p-3">
-      <p><%= parent.body %></p>
-    </div>
-
-    <p class="text-right fst-italic">Comment created
-      <%= distance_of_time_in_words(parent.created_at, Time.now) %> ago</p>
-
-    <% if unpublished_comment %>
-      <p class="alert-danger">Comment <%= parent.status %></p>
-    <% end %>
-
-    <div class="d-flex justify-content-between align-items-center">
-      <% if parent.edited_at? %>
-        <p class="alert-danger">Comment edited <%= distance_of_time_in_words(parent.updated_at, Time.now) %> ago</p>
-      <% else %>
-        <p></p>
-      <% end %>
-
-      <% if parent.author == current_author %>
-        <div class="d-block text-right mb-3 btn-group ml-auto">
-
-          <% if unpublished_comment %>
-            <%= link_to 'Publish', publish_post_comment_path(@post, parent, comment: { status: :published }),
-                        method: :post,
-                        class: "btn btn-success" %>
-          <% end %>
-
-          <% if diff_edit_comment_time >= 1.hour %>
-            <div class="d-inline-block"
-                 tabindex="0"
-                 title="No editing possible - more than an hour has passed since the comment was created">
-              <%= link_to 'Edit', home_path,
-                          class: "btn btn-secondary disabled" %>
-            </div>
-
-          <% else %>
-
-            <%= link_to 'Edit', edit_post_comment_path(parent.post, parent),
-                        class: "btn btn-secondary" %>
-          <% end %>
-          <%= link_to 'Delete', post_comment_path(@post, parent),
-                      method: :delete,
-                      data: { confirm: 'Are you sure you want to delete the comment?' },
-                      class: "btn btn-danger" %>
-        </div>
-      <% else %>
-      <% end %>
-    </div>
-    <% unless unpublished_comment || current_author == parent.author %>
-      <div id="comment-reply-<%= parent.id %>" class="comment-reply">
-        <%= link_to 'Reply', new_post_comment_path(@post, comment_id: parent.id), remote: true, class: "btn btn-primary mb-4" if current_author %>
-      </div>
-    <% end %>
-
-    <% if flash[:comment_error].present? && flash[:comment_id].to_i == parent.id %>
-      <div id="error_explanation">
-        <p class="alert alert-danger"><%= flash[:comment_error] %></p>
-      </div>
-    <% end %>
-
-    <%= render 'comments/comment', comments: children %>
   </div>
-<% end %>
+
+  <div class="d-block p-3">
+    <p><%= comment.body %></p>
+  </div>
+
+  <p class="text-right fst-italic">Comment created
+    <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago</p>
+
+  <% if unpublished_comment %>
+    <p class="alert-danger">Comment <%= comment.status %></p>
+  <% end %>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <% if comment.edited_at? %>
+      <p class="alert-danger">Comment edited <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago</p>
+    <% else %>
+      <p></p>
+    <% end %>
+
+    <% if comment.author == current_author %>
+      <div class="d-block text-right mb-3 btn-group ml-auto">
+
+        <% if unpublished_comment %>
+          <%= link_to 'Publish', publish_post_comment_path(@post, comment, comment: { status: :published }),
+                      method: :post,
+                      class: "btn btn-success" %>
+        <% end %>
+
+        <% if diff_edit_comment_time >= 1.hour %>
+          <div class="d-inline-block"
+               tabindex="0"
+               title="No editing possible - more than an hour has passed since the comment was created">
+            <%= link_to 'Edit', home_path,
+                        class: "btn btn-secondary disabled" %>
+          </div>
+
+        <% else %>
+
+          <%= link_to 'Edit', edit_post_comment_path(comment.post, comment),
+                      class: "btn btn-secondary" %>
+        <% end %>
+        <%= link_to 'Delete', post_comment_path(@post, comment),
+                    method: :delete,
+                    data: { confirm: 'Are you sure you want to delete the comment?' },
+                    class: "btn btn-danger" %>
+      </div>
+    <% else %>
+    <% end %>
+  </div>
+  <% unless unpublished_comment || current_author == comment.author %>
+    <div id="comment-reply-<%= comment.id %>" class="comment-reply">
+      <%= link_to 'Reply', new_post_comment_path(@post, comment_id: comment.id), remote: true, class: "btn btn-primary mb-4" if current_author %>
+    </div>
+  <% end %>
+
+  <% if flash[:comment_error].present? && flash[:comment_id].to_i == comment.id %>
+    <div id="error_explanation">
+      <p class="alert alert-danger"><%= flash[:comment_error] %></p>
+    </div>
+  <% end %>
+</div>
