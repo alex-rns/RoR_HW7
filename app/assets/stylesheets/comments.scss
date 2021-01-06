@@ -7,11 +7,25 @@
   background: #fff;
   padding: 1em 0 0.5em 1em;
   margin-bottom: 1em;
+  box-shadow: -13px -12px 10px 3px rgba(234, 234, 234, 1);
   &:not(:first-child) {
     margin-left: 3em;
-    box-shadow: -13px -12px 10px 3px rgba(234, 234, 234, 1);
   }
   &:first-child {
     padding-right: 1em;
   }
+}
+
+
+
+.new-comment {
+  border-radius: 1em;
+  background: #fff;
+  padding: 1em 0 0.5em 1em;
+  .comment-header {
+    padding-right: 1em;
+  }
+}
+.comment-form {
+  padding: 1em;
 }

@@ -31,7 +31,7 @@
     <p class="alert-danger">Comment <%= comment.status %></p>
   <% end %>
 
-  <div class="d-flex justify-content-between align-items-center">
+  <div class="d-flex justify-content-between align-items-center mr-3">
     <% if comment.edited_at? %>
       <p class="alert-danger">Comment edited <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago</p>
     <% else %>
@@ -68,11 +68,11 @@
     <% else %>
     <% end %>
   </div>
-  <% unless unpublished_comment || current_author == comment.author %>
+  <%# unless unpublished_comment || current_author == comment.author %>
     <div id="comment-reply-<%= comment.id %>" class="comment-reply">
       <%= link_to 'Reply', new_post_comment_path(@post, comment_id: comment.id), remote: true, class: "btn btn-primary mb-4" if current_author %>
     </div>
-  <% end %>
+  <%# end %>
 
   <% if flash[:comment_error].present? && flash[:comment_id].to_i == comment.id %>
     <div id="error_explanation">
