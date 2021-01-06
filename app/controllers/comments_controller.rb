@@ -11,7 +11,8 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comments_params)
     @comment.author_id = current_author.id
     if @comment.save
-      redirect_to @post, notice: "Post was successfully created."
+      render 'comments/create'
+      # redirect_to @post, notice: "Post was successfully created."
     else
       parent_id = @comment.parent ? @comment.parent.id : nil
       redirect_to @post, flash: { comment_error: @comment.errors.full_messages.join(', '), comment_id: parent_id}

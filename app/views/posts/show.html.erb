@@ -47,14 +47,17 @@
       </div>
     <% end %>
   </div>
-  <div>
+
+  <div class="new-comment" id="new-comment">
     <%= nested_comments @post.comments.arrange %>
   </div>
 
 </div>
 <h5 class="mt-5"> Add a new comment:</h5>
 <% if current_author %>
-  <%= render 'comments/form', comment_id: nil %>
+  <div id="comment-reply-root">
+    <%= render 'comments/form', comment_id: nil %>
+  </div>
 <% else %>
   <p class="py-4">Only registered users can leave comments</p>
 <% end %>

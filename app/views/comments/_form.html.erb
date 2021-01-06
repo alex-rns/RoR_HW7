@@ -1,4 +1,4 @@
-<%= form_with model: [@post, @post.comments.build] do |form| %>
+<%= form_with model: [@post, @post.comments.build], local: false, class: "comment-form" do |form| %>
 
 
   <div class="field py-2">

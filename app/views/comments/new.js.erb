@@ -1,1 +1,5 @@
-$('#comment-reply-<%= params[:comment_id] %>').replaceWith('<%= j render('form') %>')
+$('.comment-reply').show()
+$('.comment-form').hide()
+$('#comment-reply-<%= params[:comment_id] %>').after('<%= j render('form') %>')
+$('#comment-reply-<%= params[:comment_id] %>').hide()
+$('#comment-reply-root .comment-form').show()
