@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_post, only: [:create, :edit, :update, :destroy, :publish, :new]
-  before_action :set_comment, only: [:update, :destroy, :edit, :publish]
+  before_action :set_comment, only: [:update, :destroy, :edit, :publish, :destroy]
   before_action :set_cookies
 
   def new
@@ -38,8 +38,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
-    redirect_to @post, notice: "Comment was successfully deleted."
+    if @comment.destroy
+      render 'destroy'
+    else
+      redirect_to @post
+    end
+
+    # redirect_to @post, notice: "Comment was successfully deleted."
   end
 
   private
