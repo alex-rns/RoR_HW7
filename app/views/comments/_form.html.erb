@@ -1,6 +1,5 @@
 <%= form_with model: [@post, @post.comments.build], local: false, class: "comment-form" do |form| %>
 
-
   <div class="field py-2">
     <%= form.text_area :body, class: "form-control" %>
   </div>

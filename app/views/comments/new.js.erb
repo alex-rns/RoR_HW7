@@ -1,5 +1,5 @@
 $('.comment-reply').show()
 $('.comment-form').hide()
-$('#comment-reply-<%= params[:comment_id] %>').parent().after('<%= j render('form') %>')
+$('#comment-reply-<%= params[:comment_id] %>').parent().after('<%= j render('form') %>').slideUp(400)
 $('#comment-reply-<%= params[:comment_id] %>').hide()
 $('#comment-reply-root .comment-form').show()
