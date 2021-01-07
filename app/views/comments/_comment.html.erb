@@ -1,21 +1,27 @@
 <% unpublished_comment = comment.status == "unpublished" %>
 <% diff_edit_comment_time = Time.now - comment.created_at %>
 
-<div id="comment-<%= comment.id %>">
+<div id="comment-<%= comment.id %>" class="comment mb-3">
   <div class="comment-header d-flex justify-content-between">
     <strong class="mr-3">
       <%= image_tag comment.author.avatar.variant(resize_to_limit: [40, 40]), class: "mr-3" if comment.author.avatar.present? %>
       <%= comment.author.first_name %> <%= comment.author.last_name %>
     </strong>
 
-    <div>
-      total votes:<%= comment.votes.count %>
-      rating:<%= comment.votes.map(&:vote_value).sum %>
-      <% if comment.votes.find { |vote| vote.author_id == current_author.id } %>
-        <p>you have already voted</p>
-      <% else %>
-        <%= link_to 'Like', post_comment_votes_path(@post, comment), remote: true, method: :post, class: 'btn btn-success btn-sm' %>
-        <%= link_to 'Dislike', post_comment_dislikes_path(@post, comment), remote: true, method: :post, class: 'btn btn-success btn-sm' %>
+    <div class="votes" title="👍<%= comment.votes.where(vote_value: 1).count %> | 👎<%= comment.votes.where(vote_value: -1).count %> | Total voted:<%= comment.votes.count %>">
+
+      <strong>Comment rating: <%= comment.votes.map(&:vote_value).sum %></strong>
+      <% unless current_author == comment.author %>
+        <div class="vote-button mb-3 text-right">
+          <% if current_author %>
+            <% if comment.votes.find { |vote| vote.author_id == current_author.id } %>
+              <p>You have already voted</p>
+            <% else %>
+              <%= link_to '👍', post_comment_votes_path(@post, comment), remote: true, method: :post, class: 'btn btn-success btn-sm fs-4' %>
+              <%= link_to '👎', post_comment_dislikes_path(@post, comment), remote: true, method: :post, class: 'btn btn-success btn-sm fs-4' %>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
@@ -30,14 +36,16 @@
   <% if unpublished_comment %>
     <p class="alert-danger">Comment <%= comment.status %></p>
   <% end %>
+  <% if comment.edited_at? %>
+    <p class="alert-danger">Comment edited <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago</p>
+  <% end %>
+  <div class="d-flex justify-content-between align-items-center mr-1">
 
-  <div class="d-flex justify-content-between align-items-center mr-3">
-    <% if comment.edited_at? %>
-      <p class="alert-danger">Comment edited <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago</p>
-    <% else %>
-      <p></p>
-    <% end %>
-
+    <%# unless unpublished_comment || current_author == comment.author %>
+    <div id="comment-reply-<%= comment.id %>" class="comment-reply">
+      <%= link_to 'Reply', new_post_comment_path(@post, comment_id: comment.id), remote: true, class: "btn btn-primary mb-4" if current_author %>
+    </div>
+    <%# end %>
     <% if comment.author == current_author %>
       <div class="d-block text-right mb-3 btn-group ml-auto">
 
@@ -69,11 +77,6 @@
     <% else %>
     <% end %>
   </div>
-  <%# unless unpublished_comment || current_author == comment.author %>
-    <div id="comment-reply-<%= comment.id %>" class="comment-reply">
-      <%= link_to 'Reply', new_post_comment_path(@post, comment_id: comment.id), remote: true, class: "btn btn-primary mb-4" if current_author %>
-    </div>
-  <%# end %>
 
   <% if flash[:comment_error].present? && flash[:comment_id].to_i == comment.id %>
     <div id="error_explanation">
