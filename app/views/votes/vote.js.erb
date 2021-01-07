@@ -1,2 +1,1 @@
-$("#comment-<%=@comment.id %>").hide()
-$("#comment-<%= @comment.id %>").after('<%= j render partial:'comments/comment', locals: {comment: @comment} %>');
+$("#comment-<%= @comment.id %>").replaceWith('<%= j render partial:'comments/comment', locals: {comment: @comment} %>');
