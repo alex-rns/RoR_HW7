@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    author = Author.find_by_email(params[:email])
+    author = Author.find_by(email: params[:email])
     if author && author.authenticate(params[:password])
       session[:author_id] = author.id
       redirect_to home_path, notice: "Logged in!"

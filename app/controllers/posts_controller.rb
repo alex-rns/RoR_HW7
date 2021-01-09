@@ -2,11 +2,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :set_cookies
   before_action :check_current_author, only: [:new, :edit, :update, :destroy]
+  WillPaginate.per_page = 8
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.order(updated_at: :desc, created_at: :desc).paginate(page: params[:page], per_page: 8)
+    # @posts = Post.all.order(updated_at: :desc, created_at: :desc).paginate(page: params[:page], per_page: 8)
+    @posts = Post.all.order('created_at DESC').page(params[:page])
   end
 
   # GET /posts/1

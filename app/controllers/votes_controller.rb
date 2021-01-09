@@ -1,10 +1,10 @@
 class VotesController < ApplicationController
-  before_action :set_post
   before_action :set_comment
+  before_action :set_post
 
   def create
     if @comment.votes.create!(author: current_author, vote_value: 1)
-      render 'votes/vote'
+      render 'vote'
     else
       redirect_to @post
     end
@@ -12,7 +12,7 @@ class VotesController < ApplicationController
 
   def dislike
     if @comment.votes.create!(author: current_author, vote_value: -1)
-      render 'votes/vote'
+      render 'vote'
     else
       redirect_to @post
     end
@@ -20,15 +20,12 @@ class VotesController < ApplicationController
 
   private
 
-  def set_post
-    @post = Post.find(params[:post_id])
-  end
-
   def set_comment
     @comment = Comment.find(params[:comment_id])
   end
 
-  def votes_params
-    params.require(:vote).permit(:author)
+  def set_post
+    @post = @comment.post
   end
+
 end
